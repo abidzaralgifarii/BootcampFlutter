@@ -38,7 +38,7 @@ void main(){
     }
   }
 }*/
-/** soal 3
+/** SOAL 3
  import 'dart:io';
 void main(){
   print('hari ini hari apaaa?');
@@ -70,8 +70,8 @@ void main(){
     print('hari telah berganti\ntak bisa kuhindari\ntibalah saat ini bertemu dengannya');
     break;
   }
-}
-*/
+}*/
+
 /** soal 4
 void main(){
   var tanggal = 10;
