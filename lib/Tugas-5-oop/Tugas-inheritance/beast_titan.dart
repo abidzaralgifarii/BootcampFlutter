@@ -1,4 +1,4 @@
-import 'package:tugas4/Tugas-5-oop/Tugas-inheritance/titan.dart';
+import 'titan.dart';
 
 class BeastTitan extends Titan{
   String lempar() => 'wush..wush..';
