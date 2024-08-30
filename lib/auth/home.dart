@@ -49,18 +49,20 @@ class Home extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 30),
+                padding: const EdgeInsets.only(
+                    top: 40, left: 10, right: 14, bottom: 20),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'Latest News',
                         style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        )),
+                          textStyle: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff111e29)
+                              ),
+                        ),
                       ),
                       Icon(Icons.arrow_forward)
                     ]),
@@ -78,9 +80,7 @@ class Home extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
-                      )
-                    )
-                  ),
+                      ))),
               Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ImageTextWidget(
@@ -113,7 +113,6 @@ class Home extends StatelessWidget {
                       )
                     )
                   )
-
             ],
           ),
         ),
@@ -137,7 +136,8 @@ class ImageTextWidget extends StatelessWidget {
     this.imageWidth = 100.0,
     this.imageHeight = 100.0,
     this.textStyle = const TextStyle(fontSize: 8, fontWeight: FontWeight.bold),
-  });
+  }
+);
 
   @override
   Widget build(BuildContext context) {
@@ -155,10 +155,15 @@ class ImageTextWidget extends StatelessWidget {
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(width: 30,),
+            SizedBox(
+              width: 30,
+            ),
             Text(
               textJudul,
-              style: GoogleFonts.poppins(),
+              style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff141E28)),
             ),
             Text(
               text,
@@ -166,7 +171,7 @@ class ImageTextWidget extends StatelessWidget {
             ),
           ],
         )
-        ),
+      ),
       ],
     );
   }
