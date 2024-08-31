@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:sanberappflutter/auth/BottomNavBar.dart';
+import 'BottomNavBar.dart';
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});
 
@@ -33,8 +34,11 @@ class GetStartedPage extends StatelessWidget {
                 height: 52,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: (){},
-                  child: Text('Masuk',
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavBar()));
+                  },
+                  child: Text(
+                    'Masuk',
                   style: GoogleFonts.arimo(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
