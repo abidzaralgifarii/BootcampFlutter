@@ -30,7 +30,7 @@ class Settings extends StatelessWidget {
               height: 20,
               width: 120,
               child: ElevatedButton(onPressed: (){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Home_1()),
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Home()),
                 (route)=> false);
               }, child: Text('logout')),
               ),

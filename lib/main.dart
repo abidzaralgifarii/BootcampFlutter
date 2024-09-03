@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sanberappflutter/auth/get_started_page.dart';
 void main() {
-  runApp(const Home_1());
+  runApp(const UserPage());
 }
 
-class Home_1 extends StatelessWidget {
-  const Home_1({super.key});
+class UserPage extends StatelessWidget {
+  const UserPage({super.key});
 
   @override
   Widget build(BuildContext context) {
