@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
                   height: 330,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/image/image_login.png'),
+                      image: AssetImage('assets/image/image_login_app.png'),
                     ),
                   ),
                 ),
@@ -48,13 +48,16 @@ class LoginPage extends StatelessWidget {
                     backgroundColor: Color(0xff3498DB),
                   ),
                   onPressed: () async {
+                    String email = emailController.text;
+                    String password = passwordController.text;
                     try {
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: emailController.text.trim(),
-                        password: passwordController.text.trim(),
+                      final result = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                        email: email,
+                        password: password,
                       );
                       // Navigasi ke halaman utama atau lakukan aksi setelah login
-                    } catch (e) {
+                    } on FirebaseAuthException catch (e) {
                       print("Error: $e");
                       // Tampilkan pesan kesalahan
                     }
@@ -137,7 +140,7 @@ class LoginPage extends StatelessWidget {
                     'Belum punya akun? silahkan',
                     style: TextStyle(color: Color(0xff3498DB)),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Navigator.pushNamed(context, '/register');
                     },
@@ -156,20 +159,26 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({super.key, required this.label, required this.controller});
+class CustomTextFormField extends StatefulWidget {
+  const CustomTextFormField(
+      {super.key, required this.label, required this.controller});
   final String label;
   final TextEditingController controller;
 
+  @override
+  _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 25),
       child: TextFormField(
-        controller: controller,
+        controller: widget.controller,
         decoration: InputDecoration(
           label: Text(
-            label,
+            widget.label,
             style: TextStyle(color: Color(0xffC0C0C0)),
           ),
           border: OutlineInputBorder(

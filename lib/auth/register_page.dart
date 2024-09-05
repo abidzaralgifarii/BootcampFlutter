@@ -10,9 +10,9 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final TextEditingController confirmPasswordController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+    final confirmPasswordController = TextEditingController();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -50,26 +50,23 @@ class RegisterPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    backgroundColor: Color(0xff3498DB),
-                  ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      backgroundColor: Color(0xff3498DB)),
                   onPressed: () async {
-                    if (passwordController.text != confirmPasswordController.text) {
-                      // Tampilkan pesan kesalahan jika password dan konfirmasi tidak sama
-                      print("Password dan konfirmasi password tidak cocok");
-                      return;
-                    }
-                    try {
-                      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: 'abidzar@gmail.com',
-                        password: 'abidzar',
-                      );
-                      // Navigasi ke halaman utama atau lakukan aksi setelah registrasi
-                    } on Exception catch (e) {
-                      print('$e');
-                      // Tampilkan pesan kesalahan
+                    String email = emailController.text;
+                    String password = passwordController.text;
+                    String confirmPassword = confirmPasswordController.text;
+
+                    if (password == confirmPassword) {
+                      try {
+                        final result = await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: email,
+                                password: password);
+                      } on FirebaseAuthException catch (e) {
+                        print(e.message);
+                      }
                     }
                   },
                   child: Text(
@@ -110,30 +107,12 @@ class RegisterPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      surfaceTintColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.red),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      backgroundColor: Colors.white,
-                    ),
-                    onPressed: () async {
-                    if (passwordController.text != confirmPasswordController.text) {
-                      // Tampilkan pesan kesalahan jika password dan konfirmasi tidak sama
-                      print("Password dan konfirmasi password tidak cocok");
-                      return;
-                    }
-                    try {
-                      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: emailController.text.trim(),
-                        password: passwordController.text.trim(),
-                      );
-                      // Navigasi ke halaman utama atau lakukan aksi setelah registrasi
-                    } on Exception catch (e) {
-                      print('$e');
-                      // Tampilkan pesan kesalahan
-                    }
-                  },
+                        surfaceTintColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(8)),
+                        backgroundColor: Colors.white),
+                    onPressed: () {},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -141,10 +120,9 @@ class RegisterPage extends StatelessWidget {
                           width: 33,
                           height: 33,
                           decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/icon/icon_google.png'),
-                            ),
-                          ),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/icon/icon_google.png'))),
                         ),
                         Text(
                           'Mendaftar',
@@ -162,11 +140,12 @@ class RegisterPage extends StatelessWidget {
                 children: [
                   Text(
                     'Sudah punya akun? silahkan',
-                    style: TextStyle(color: Color(0xff3498DB)),
+                    style: TextStyle(color: Color(0xffC0C0C0)),
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                     child: Text(
                       ' masuk',
@@ -183,20 +162,26 @@ class RegisterPage extends StatelessWidget {
   }
 }
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({super.key, required this.label, required this.controller});
+class CustomTextFormField extends StatefulWidget {
+  const CustomTextFormField(
+      {super.key, required this.label, required this.controller});
   final String label;
   final TextEditingController controller;
 
+  @override
+  _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 25),
       child: TextFormField(
-        controller: controller,
+        controller: widget.controller,
         decoration: InputDecoration(
           label: Text(
-            label,
+            widget.label,
             style: TextStyle(color: Color(0xffC0C0C0)),
           ),
           border: OutlineInputBorder(

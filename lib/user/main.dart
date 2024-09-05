@@ -15,6 +15,6 @@ void main(List<String> args) async {
 class myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home : UserPage());
+    return  MaterialApp(home : RegisterPage());
   }
 }
