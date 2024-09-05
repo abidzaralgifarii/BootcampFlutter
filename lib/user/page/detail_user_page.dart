@@ -1,48 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:sanberappflutter/user/model/user_model.dart';
-import 'package:sanberappflutter/user/service/user_service.dart';
+import 'package:get/get.dart';
+import 'package:sanberappflutter/user/controller/user_controller.dart';
 
-class UserDetail extends StatefulWidget {
-  const UserDetail({super.key, required this.userId});
+class UserDetail extends StatelessWidget {
   final int userId;
 
-  @override
-  State<UserDetail> createState() => _UserDetailState();
-}
+  UserDetail({required this.userId});
 
-class _UserDetailState extends State<UserDetail> {
-  UserModel? user;
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  getData()async{
-    isLoading = true;
-    user = await UserService().detailUser(widget.userId);
-    isLoading = false;
-    setState(() {});
-  }
   @override
   Widget build(BuildContext context) {
+    // Mengakses controller menggunakan GetX
+    final userC = Get.find<UserController>();
+
+    // Mengambil user berdasarkan ID
+    final user = userC.users.firstWhere((user) => user.id == userId);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Detail Page'),
+        title: Text('User Detail'),
+        centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: isLoading
-        ? const Center(
-          child: const CircularProgressIndicator(),
-        )
-        : ListTile(
-              title: Text('${user?.firstName} ${user?.lastName}'),
-              leading: Image.network(user?.avatar?? ''),
-              subtitle: Text(user?.email??''),
-        )
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(user.avatar),
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              '${user.firstName} ${user.lastName}',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Email: ${user.email}',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'ID: ${user.id}',
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
       ),
     );
   }

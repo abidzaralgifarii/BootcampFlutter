@@ -5,7 +5,7 @@ class UserService {
   Dio dio = Dio();
   static const url = 'https://reqres.in/api/users?page=2';
 
-  Future<List<UserModel>> fetchUser() async {
+  Future<List<UserModel>> fetchDataUser() async {
     try {
       final response = await dio.get(url);
 

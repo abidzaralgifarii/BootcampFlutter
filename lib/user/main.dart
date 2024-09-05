@@ -4,6 +4,7 @@ import 'package:sanberappflutter/user/page/User_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sanberappflutter/firebase_options.dart';
 
+
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -14,6 +15,6 @@ void main(List<String> args) async {
 class myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(home : RegisterPage());
+    return  MaterialApp(home : UserPage());
   }
 }
