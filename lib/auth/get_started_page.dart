@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanberappflutter/auth/BottomNavBar.dart';
-import 'BottomNavBar.dart';
+import 'package:get/get.dart';
+import 'package:sanberappflutter/auth/login.dart';
+import 'package:sanberappflutter/routes/app_routes_named.dart';
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});
 
@@ -29,13 +31,13 @@ class GetStartedPage extends StatelessWidget {
               Text('Berita Terpercaya, Di Ujung Jari Anda',
               style: TextStyle(fontSize: 15),
               ),
-              Spacer(),
+              SizedBox(height: 70),
               SizedBox(
                 height: 52,
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavBar()));
+                    Get.toNamed(AppRoutesNamed.loginPage);
                   },
                   child: Text(
                     'Masuk',
@@ -56,7 +58,9 @@ class GetStartedPage extends StatelessWidget {
                 height: 52,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Get.toNamed(AppRoutesNamed.registerPage);
+                  },
                   child: Text('Mendaftar',
                   style: GoogleFonts.arimo(
                     fontSize: 15,

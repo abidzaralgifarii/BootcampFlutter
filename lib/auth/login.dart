@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+import 'package:sanberappflutter/routes/app_routes_named.dart';
+
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -23,7 +26,7 @@ class LoginPage extends StatelessWidget {
                   height: 330,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/image/image_login_app.png'),
+                      image: AssetImage('assets/image/image_login.png'),
                     ),
                   ),
                 ),
@@ -56,10 +59,9 @@ class LoginPage extends StatelessWidget {
                         email: email,
                         password: password,
                       );
-                      // Navigasi ke halaman utama atau lakukan aksi setelah login
+                      Get.offNamed(AppRoutesNamed.bottomNavBar);
                     } on FirebaseAuthException catch (e) {
                       print("Error: $e");
-                      // Tampilkan pesan kesalahan
                     }
                   },
                   child: Text(

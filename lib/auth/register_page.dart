@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+import 'package:sanberappflutter/routes/app_routes_named.dart';
 import 'login.dart';
 import 'package:sanberappflutter/firebase_options.dart';
 
@@ -62,8 +64,8 @@ class RegisterPage extends StatelessWidget {
                       try {
                         final result = await FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
-                                email: email,
-                                password: password);
+                                email: email, password: password);
+                        Get.offNamed(AppRoutesNamed.bottomNavBar);
                       } on FirebaseAuthException catch (e) {
                         print(e.message);
                       }
@@ -144,8 +146,7 @@ class RegisterPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    Get.toNamed(AppRoutesNamed.loginPage);
                     },
                     child: Text(
                       ' masuk',
